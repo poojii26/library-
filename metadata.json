@@ -1,0 +1,6 @@
+{
+  "name": "Lexicon QA",
+  "description": "An interactive classical AI library question answering system powered by knowledge representation, weighted IF-THEN rules, and explainable search with persistent chat history.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
