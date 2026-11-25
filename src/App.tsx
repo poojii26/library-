@@ -26,6 +26,7 @@ export function App() {
     setIsDark,
     createNewChat,
     selectSession,
+    renameSession,
     deleteSession,
     clearAllHistory,
     appendExchange,
@@ -77,7 +78,7 @@ export function App() {
   );
 
   return (
-    <div className="h-screen w-full flex flex-col overflow-hidden bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100">
+    <div className="h-screen w-full flex flex-col overflow-hidden bg-[#FAF9F6] text-stone-900 dark:bg-[#0B1110] dark:text-stone-100">
       <TopBar
         activeView={activeView}
         onSelectView={setActiveView}
@@ -96,6 +97,7 @@ export function App() {
           onSelectSession={selectSession}
           onSelectView={setActiveView}
           onNewChat={createNewChat}
+          onRenameSession={renameSession}
           onDeleteSession={deleteSession}
           onClearAll={clearAllHistory}
           onToggleTheme={() => setIsDark((prev) => !prev)}

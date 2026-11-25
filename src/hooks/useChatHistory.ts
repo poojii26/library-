@@ -3,13 +3,13 @@ import { DEFAULT_LIBRARY_TEXT, DEFAULT_RULE_BASE } from '../engine/libraryQA';
 import { ChatMessage, ChatSession, EngineMode, RuleTopic } from '../types/qa';
 
 const STORAGE_KEYS = {
-  SESSIONS: 'lexicon_qa_sessions_v1',
-  ACTIVE_SESSION_ID: 'lexicon_qa_active_session_v1',
-  LIBRARY_TEXT: 'lexicon_qa_library_text_v1',
-  RULE_BASE: 'lexicon_qa_rule_base_v1',
-  THRESHOLD: 'lexicon_qa_threshold_v1',
-  ENGINE_MODE: 'lexicon_qa_engine_mode_v1',
-  THEME: 'lexicon_qa_theme_v1',
+  SESSIONS: 'folio_desk_sessions_v1',
+  ACTIVE_SESSION_ID: 'folio_desk_active_session_v1',
+  LIBRARY_TEXT: 'folio_desk_library_text_v1',
+  RULE_BASE: 'folio_desk_rule_base_v1',
+  THRESHOLD: 'folio_desk_threshold_v1',
+  ENGINE_MODE: 'folio_desk_engine_mode_v1',
+  THEME: 'folio_desk_theme_v1',
 };
 
 function createEmptySession(): ChatSession {
@@ -78,7 +78,6 @@ export function usePersistentQAState() {
     return localStorage.getItem(STORAGE_KEYS.THEME) === 'dark';
   });
 
-  // Ensure activeSessionId always points to an existing session
   const resolvedActiveId =
     sessions.some((s) => s.id === activeSessionId) ? activeSessionId : sessions[0]?.id ?? '';
 
@@ -127,7 +126,6 @@ export function usePersistentQAState() {
     sessions.find((s) => s.id === resolvedActiveId) ?? sessions[0];
 
   const createNewChat = useCallback(() => {
-    // If current active session is already empty, just keep it selected
     const current = sessions.find((s) => s.id === resolvedActiveId);
     if (current && current.messages.length === 0) {
       return current.id;
@@ -140,6 +138,14 @@ export function usePersistentQAState() {
 
   const selectSession = useCallback((id: string) => {
     setActiveSessionId(id);
+  }, []);
+
+  const renameSession = useCallback((id: string, newTitle: string) => {
+    const clean = newTitle.trim();
+    if (!clean) return;
+    setSessions((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, title: clean } : s))
+    );
   }, []);
 
   const deleteSession = useCallback(
@@ -213,6 +219,7 @@ export function usePersistentQAState() {
     setIsDark,
     createNewChat,
     selectSession,
+    renameSession,
     deleteSession,
     clearAllHistory,
     appendExchange,

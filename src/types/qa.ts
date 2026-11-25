@@ -75,18 +75,7 @@ export interface ChatSession {
 export interface EvalQuestion {
   id: string;
   question: string;
-  expectedTopicKey: string | null; // null means out-of-scope -> fallback expected
+  expectedTopicKey: string | null;
   categoryLabel: string;
   setType: 'main' | 'heldout';
-}
-
-export interface DocumentedFault {
-  id: string;
-  title: string;
-  description: string;
-  evidenceQuestion: string;
-  originalOutcome: string;
-  finalOutcome: string;
-  fixSummary: string;
-  status: 'Fixed' | 'Partly Fixed' | 'Limitation';
 }

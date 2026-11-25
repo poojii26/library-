@@ -1,6 +1,6 @@
 {
-  "name": "Lexicon QA",
-  "description": "An interactive classical AI library question answering system powered by knowledge representation, weighted IF-THEN rules, and explainable search with persistent chat history.",
+  "name": "Folio Desk",
+  "description": "An interactive classical AI library question answering workspace with weighted rule scoring, live Knowledge Base editing, and persistent chat history.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
